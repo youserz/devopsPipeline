@@ -23,12 +23,13 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Baixar código
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
-      - name: Configurar Python
-        uses: actions/setup-python@v5
+      - name: Configurar Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
         with:
-          python-version: '3.12'
-
-      - name: Executar
-        run: python horarioAgora.py
+          context: .
+          push: false
